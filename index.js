@@ -1,21 +1,22 @@
 import express from 'express'
 
 const app = express()
+app.set('view engine', 'ejs')
 
 const port = 8080
 
 function greeting(req, res) {
-    res.send('Hello World')
+    res.send('Hello Galaxy')
 }
 
 const greetingData = {
-    greeting: 'Hello, machine'
+    greeting: 'Hello, machine',
+    details: 'it is fine evening',
 }
 
 app.get('/', greeting)
-
 app.get('/special_greeting/:name', (req, res) => {
-    res.send('Special greeting, ' + req.params.name)
+    res.render('greeting', {name: req.params.name})
 })
 
 app.get('/api/greeting', (req, res) => {
